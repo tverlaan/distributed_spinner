@@ -14,4 +14,4 @@ config :distributed_spinner, if_eth0: [
     hostname: "dist_spinner"
   ]
 
-config :nerves_io_led, names: [ green: "led1" ]
+config :nerves_io_led, names: [ green: "led0" ]
