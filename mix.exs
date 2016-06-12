@@ -41,6 +41,7 @@ defmodule DistributedSpinner.Mixfile do
     ]
   end
 
+  # there is an error with the latest version for rpi from hex in combination with certain libraries
   def system("rpi") do
     [{:nerves_system_rpi, github: "nerves-project/nerves_system_rpi", branch: "stable"}]
   end

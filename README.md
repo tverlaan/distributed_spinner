@@ -1,5 +1,7 @@
 # DistributedSpinner
 
+Change the sname in `vm.args` to your needs. Change the IP address in the config for your make & model.
+
 To start your Nerves app:
 
   * Install dependencies with `mix deps.get`
