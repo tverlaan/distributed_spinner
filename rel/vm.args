@@ -1,0 +1,6 @@
+## Start the Elixir shell
+-sname 1@rpi
+-setcookie test
+-noshell
+-user Elixir.IEx.CLI
+-extra --no-halt
