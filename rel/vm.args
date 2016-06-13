@@ -1,5 +1,5 @@
 ## Start the Elixir shell
--sname 1@rpi
+-name 3@192.168.2.12
 -setcookie test
 -noshell
 -user Elixir.IEx.CLI
