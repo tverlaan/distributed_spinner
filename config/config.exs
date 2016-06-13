@@ -5,9 +5,13 @@
 # is restricted to this project.
 use Mix.Config
 
-config :nerves, :firmware,
-  rootfs_additions: "config/rootfs-additions/"
-
 config :nerves_io_led, names: [ green: "led0" ]
+
+config :distributed_spinner, initial_nodes:
+  [
+    :'1@192.168.2.10',
+    :'2@192.168.2.11',
+    :'3@192.168.2.12',
+  ]
 
 import_config "#{Mix.Project.config[:target]}/config.exs"
