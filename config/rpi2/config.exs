@@ -7,11 +7,9 @@ use Mix.Config
 
 config :distributed_spinner, if_eth0: [
     mode: "static",
-    ip: "192.168.2.10",
+    ip: "192.168.2.11",
     router: "192.168.2.1",
     mask: "24",
     subnet: "255.255.255.0",
-    hostname: "dist_spinner"
+    hostname: "dist_spinner_#{Mix.Project.config[:target]}"
   ]
-
-config :nerves_io_led, names: [ green: "led0" ]

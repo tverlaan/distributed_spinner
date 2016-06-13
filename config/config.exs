@@ -5,4 +5,9 @@
 # is restricted to this project.
 use Mix.Config
 
-import_config "#{Mix.Project.config[:target]}.exs"
+config :nerves, :firmware,
+  rootfs_additions: "config/rootfs-additions/"
+
+config :nerves_io_led, names: [ green: "led0" ]
+
+import_config "#{Mix.Project.config[:target]}/config.exs"
