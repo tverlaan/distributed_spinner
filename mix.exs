@@ -25,7 +25,6 @@ defmodule DistributedSpinner.Mixfile do
         :nerves,
         :logger,
         :nerves_networking,
-        :nodefinder,
         :phoenix_pubsub,
         :nerves_io_led
       ]]
@@ -35,7 +34,6 @@ defmodule DistributedSpinner.Mixfile do
     [
       {:nerves, "~> 0.3.0"},
       {:nerves_networking, github: "nerves-project/nerves_networking"},
-      {:nodefinder, "~> 1.5"},
       {:phoenix_pubsub, "~> 1.0.0-rc.0"},
       {:nerves_io_led, github: "nerves-project/nerves_io_led"}
     ]

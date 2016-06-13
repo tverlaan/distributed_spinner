@@ -15,10 +15,9 @@ defmodule DistributedSpinner.Supervisor do
       worker(Nerves.Networking, [:eth0, if_eth0], function: :setup),
       worker(DistributedSpinner.Tracker, [[name: DistributedSpinner.Tracker, pubsub_server: :dist_spinner]]),
       worker(DistributedSpinner.Member, []),
-      worker(DistributedSpinner.Led, [])
+      worker(DistributedSpinner.Led, []),
+      worker(DistributedSpinner.NodeConnector, [])
     ]
-
-    :nodefinder.multicast_start()
 
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html
     # for other strategies and supported options
