@@ -1,6 +1,10 @@
 defmodule DistributedSpinner.Tracker do
   @behaviour Phoenix.Tracker
 
+  def list(topic) do
+    Phoenix.Tracker.list(__MODULE__, topic)
+  end
+
   def start_link(opts) do
     opts = Keyword.merge([name: __MODULE__], opts)
     GenServer.start_link(Phoenix.Tracker, [__MODULE__, opts, opts], name: __MODULE__)
