@@ -26,7 +26,7 @@ defmodule DistributedSpinner.Member do
 
   def handle_info(:timeout, state) do
     # everything turned silent
-    Phoenix.Tracker.list(DistributedSpinner.Tracker, "spinner")
+    DistributedSpinner.Tracker.list("spinner")
     |> Enum.sort
     |> case do
         [{id, _} | _] = l when length(l) > 1 ->
@@ -42,7 +42,7 @@ defmodule DistributedSpinner.Member do
     DistributedSpinner.Led.blink
     :timer.sleep 1000
 
-    Phoenix.Tracker.list(DistributedSpinner.Tracker, "spinner")
+    DistributedSpinner.Tracker.list("spinner")
     |> Enum.sort
     |> case do
         [_, {next, _} | _] ->
@@ -55,22 +55,21 @@ defmodule DistributedSpinner.Member do
   end
   def handle_info("init " <> _, state), do: {:noreply, state, @timeout}
 
-  def handle_info("next " <> next, %{identifier: next} = state) do
-    Logger.debug "next #{next}"
+  def handle_info("next " <> id, %{identifier: id} = state) do
+    Logger.debug "next #{id}"
     DistributedSpinner.Led.blink
     :timer.sleep 1000
 
-    [{h,_}|t] = Phoenix.Tracker.list(DistributedSpinner.Tracker, "spinner") |> Enum.sort
+    [{h,_}|t] = DistributedSpinner.Tracker.list("spinner") |> Enum.sort
 
-    t
-    |> Enum.sort
-    |> Enum.find(fn({id, _}) ->
-      if id > next do
-        Phoenix.PubSub.broadcast :dist_spinner, "spinner", "next #{id}"
-      else
-        Phoenix.PubSub.broadcast :dist_spinner, "spinner", "next #{h}"
-      end
-    end)
+    next = Enum.find(t, fn({n, _}) -> (n > id) == true end)
+
+    if is_nil(next) do
+      Phoenix.PubSub.broadcast :dist_spinner, "spinner", "next #{h}"
+    else
+      {n_id, _} = next
+      Phoenix.PubSub.broadcast :dist_spinner, "spinner", "next #{n_id}"
+    end
 
     {:noreply, state, @timeout}
   end
